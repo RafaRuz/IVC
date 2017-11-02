@@ -1,2 +1,2 @@
 # IVC
-Interactive Visual Computing
+This repository contains the material for "Interactive Visual Computing"
