@@ -8,8 +8,8 @@
 
 camera{
 
-    location <0,2,-7>
-    look_at <4,0,0>
+    location <-10,5,6>
+    look_at <0,0,0>
 } 
 
 light_source { 
