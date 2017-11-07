@@ -6,13 +6,13 @@
 #declare d = -2; //depth
 #declare proportion = 1;  
 
-#declare c = <1,0,0>;
+#declare c = <0,0,0>;
 
 camera{
 
 
-    location <-2,2,0>*proportion
-    look_at <4,0,-2>
+    location <-4,0,-1>
+    look_at <2,0,-1>
 
 } 
 
@@ -40,42 +40,93 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
       } // ---------------------------------------------------------
 
 //Arm1
-box{
-    c+<0.5,0.5,0.001>
-    c+<0.8,-1,-0.5>
-    pigment { Orange }
-    scale<1,1,1>*proportion 
-   
-}
+object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<0.5,0.5,0.001>, c+<0.8,-1,-0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------
+      
+//Hand1      
+ object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<0.8,-1,0.001>, c+<0.2,-1,-0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------
 //Arm2
-box{
-    c+<0.5,-1,d-0.001>
-    c+<0.8,0.5,d+0.5>
-    
-    pigment { Orange }
-    scale<1,1,1>*proportion 
-   
-}
-//Arm3
-box{
-    c+<w-0.5,0.5,d-0.001>
-    c+<w-0.8,-1,d+0.5>
-    
-    
-    pigment { Orange }
-    scale<1,1,1>*proportion 
-   
-}
-//Arm4
-box{
-    c+<w-0.5,0.5,+0.001>
-    c+<w-0.8,-1,d+1.5>
-    
-    
-    pigment { Orange }
-    scale<1,1,1>*proportion 
-   
-}
+
+object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<0.5,-1,d-0.001>,c+<0.8,0.5,d+0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------
+//Hand2      
+ object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<0.8,-1,d-0.001>, c+<0.2,-1,d+0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------      
+
+//Leg1
+ 
+object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(  c+<w-0.5,0.5,d-0.001>,c+<w-0.8,-1,d+0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------
+//Foot1      
+ object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<w-0.5,-1,d-0.001>,c+<w-1.1,-1,d+0.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Orange}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------      
+      
+//Leg2
+object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box( c+<w-0.5,0.5,+0.001>,c+<w-0.8,-1,d+1.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Cyan}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------
+      
+//Foot2      
+ object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(c+<w-0.5,-1,+0.001>,c+<w-1.1,-1,d+1.5>, 0.1   , 0)  
+         
+        texture{ pigment{ color Orange}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+      } // ---------------------------------------------------------      
+           
+      
 
 //Left eye
 
@@ -85,7 +136,7 @@ sphere { c, 0.3
                   finish { phong 1.0 reflection 0.00}
                 } // end of texture
 
-          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0,0.5,-1.9>  
+          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,0.5,-1.6>  
        }  // end of sphere -----------------------------------
        //Iris1
             sphere { c, 0.1 
@@ -94,7 +145,7 @@ sphere { c, 0.3
                               finish { phong 1.0 reflection 0.00}
                             } // end of texture
             
-                      scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.25,0.5,-1.9>  
+                      scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,0.5,-1.65>  
                    }  // end of sphere -----------------------------------  
                    
                    
@@ -108,7 +159,7 @@ sphere { c, 0.3
                   finish { phong 1.0 reflection 0.00}
                 } // end of texture
 
-          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0,0.5,-0.2>  
+          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,0.5,-0.4>  
        }  // end of sphere ----------------------------------- 
 
                    
@@ -119,7 +170,7 @@ sphere { c, 0.3
                           finish { phong 1.0 reflection 0.00}
                         } // end of texture
         
-                 scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.25,0.5,-0.13>  
+                 scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,0.5,-0.3>  
                }  // end of sphere ----------------------------------- 
        
        
