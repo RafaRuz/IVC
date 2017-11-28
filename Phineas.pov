@@ -8,12 +8,12 @@
 
 
 camera{
-    location <5,2,-5>
-    look_at <-0.5,0,0.2>
+    location <5,10,2>
+    look_at <-1,10,0>
 }
 
 light_source{
-    <50,50,-50>
+    <50,50,-50>              
     color White
 }
 
@@ -106,6 +106,7 @@ sphere{
     rotate<60,0,0>
     translate c+<-1,10,0>
 }
+
 
 // linear prism in y-direction: from .. ,to ..,number of points (first = last)
 prism { linear_sweep

@@ -8,8 +8,8 @@
 
 
 camera{
-    location <0,14,-5>
-    look_at <-0.5,11,0.2>
+    location <5,2,-5>
+    look_at <-0.5,0,0.2>
 }
 
 light_source{
@@ -29,6 +29,8 @@ background{ Orange }
 
 
 // Head
+
+// Back
 object{//Round_Cone2( point A, radius A, point B, radius B, rounding radius, merge on) 
          Round_Cone2( <0,0,0>, 1    , <0,2,0>,  0.1, 1)  
          
@@ -78,6 +80,8 @@ sphere{
     0.2*proportion
     pigment { Black }
 }   
+  
+  
      
 // Right eye       
 sphere{
@@ -91,3 +95,53 @@ sphere{
     0.2*proportion
     pigment { Black }
 }
+
+
+  
+  
+// Hair
+sphere{
+    c+<0,2,0>
+    0.1*proportion
+    rotate<60,0,0>
+    translate c+<-1,10,0>
+}
+
+// linear prism in y-direction: from .. ,to ..,number of points (first = last)
+prism { linear_sweep
+        cubic_spline
+        0.00 ,1.00 , 6
+        <-0.50, 0.00>, < 0.50,  0.00>, < 0.00,-0.75>, <-0.50, 0.00>,
+        < 0.50, 0.00>, < 0.00, -0.75>   
+        texture {pigment{ color White} 
+                 finish { phong 1.0}}
+        rotate<0,0,0> 
+        translate<-1.0,0,0> 
+      } // end of prism --------------------------------------------------------
+
+// linear prism in y-direction: from .. ,to ..,number of points (first = last)
+prism { conic_sweep
+        cubic_spline
+        0.00 ,1.00 , 6
+        <-0.50, 0.00>, < 0.50,  0.00>, < 0.00,-0.75>, <-0.50, 0.00>,
+        < 0.50, 0.00>, < 0.00, -0.75>
+        texture {pigment{ color White} 
+                 finish { phong 1.0}}
+        //scale <1,-1,1> translate<0,2.00,0>    // turn arround !!!
+        rotate<0,0,0>
+        translate<0.2,0,0> 
+      } // end of prism --------------------------------------------------------
+
+
+// linear prism in y-direction: from .. ,to ..,number of points (first = last)
+prism { conic_sweep
+        cubic_spline
+        0.00 ,1.00 , 6
+        <-0.50, 0.00>, < 0.50,  0.00>, < 0.00,-0.75>, <-0.50, 0.00>,
+        < 0.50, 0.00>, < 0.00, -0.75>
+        texture {pigment{ color White} 
+                 finish { phong 1.0}}
+        scale <1,-1,1> translate<0, 1.00,0>    // turn arround !!!
+        rotate<0,0,0>
+        translate<1.0,0,0> 
+      } // end of prism --------------------------------------------------------
