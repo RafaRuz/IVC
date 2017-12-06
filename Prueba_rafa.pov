@@ -1,18 +1,29 @@
 #include "colors.inc"
-#include "shapes.inc"
+#include "shapes.inc" 
 
-camera{
-    location <5,0,0>
-    look_at <0,0,0>
+camera { location <5,5,-5> look_at 0 }
+light_source { <-5,30,-10> 1 }
+
+
+#declare MYSPLINE = spline {
+    cubic_spline
+    -1,  <-1,0,0>
+     0,  <2,-1,0>
+     1,  <3,-1,2>
+     2,  <5,0,5>
+     3,  <3,3,3>
+     4,  <2,2,2>
+     5,  <2,-1,0>
+     6,  <3,-1,2>
+     7,  <5,0,5>
 }
 
-light_source{
-    <0,50,-50>
-    color White
-}
-
-
-
+#declare counat = 0;
+#while (counat <= 5)
+  #sphere {  MYSPLINE (counat), 0.25 pigment {Blue} }
+  #declare counat = counat + 0.1;
+#end
+ 
 /*
 merge{
     cone { <0,0,0>,1,<0,2,0>,0 
@@ -51,7 +62,7 @@ merge{
 } // end of merge --------------------------------
     */
 
-
+   /*
 
 // Head
 object{//Round_Cone2( point A, radius A, point B, radius B, rounding radius, merge on) 
@@ -68,8 +79,7 @@ object{//Round_Cone2( point A, radius A, point B, radius B, rounding radius, mer
 
 
 
-
-
+*/
 
 
 
