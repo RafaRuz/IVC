@@ -11,8 +11,8 @@
 camera{
 
 
-    location <-4,6,4>
-    look_at <2,4,-1>
+    location <-6,5,-1>
+    look_at <0,3,-1>
 
 }  
 
@@ -21,9 +21,11 @@ light_source {
         color White 
 }
 light_source { 
-        <0,-10,0>
+        <10,0,0>
         color White 
-} 
+}
+
+ 
 
 background{Blue}
 
@@ -47,7 +49,7 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
                //normal { radial sine_wave frequency 30 scale 0.25 }
                  finish { phong 1 }
                 }
-        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+        scale<1,1,1>*proportion  rotate<-90,0,0> translate<-0.5,3.7,1.4>
       } // ---------------------------------------------------------
       
 //Hand1      
@@ -58,7 +60,7 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
                //normal { radial sine_wave frequency 30 scale 0.25 }
                  finish { phong 1 }
                 }
-        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+        scale<1,1,1>*proportion  rotate<-90,0,0> translate<-0.5,3.7,1.4> 
       } // ---------------------------------------------------------
 //Arm2
 
@@ -69,7 +71,7 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
                //normal { radial sine_wave frequency 30 scale 0.25 }
                  finish { phong 1 }
                 }
-        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+        scale<1,1,1>*proportion  rotate<-90,0,0> translate<0,5,-1.5>
       } // ---------------------------------------------------------
 //Hand2      
  object{ // Round_Box(A, B, WireRadius, UseMerge)
@@ -79,7 +81,7 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
                //normal { radial sine_wave frequency 30 scale 0.25 }
                  finish { phong 1 }
                 }
-        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+        scale<1,1,1>*proportion  rotate<-90,0,0> translate<0,5,-3>
       } // ---------------------------------------------------------      
 
 //Leg1
@@ -136,7 +138,7 @@ sphere { c, 0.3
                   finish { phong 1.0 reflection 0.00}
                 } // end of texture
 
-          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,0.5,-1.6>  
+          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,3.4,-1.6>  
        }  // end of sphere -----------------------------------
        //Iris1
             sphere { c, 0.1 
@@ -145,7 +147,7 @@ sphere { c, 0.3
                               finish { phong 1.0 reflection 0.00}
                             } // end of texture
             
-                      scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,0.5,-1.65>  
+                      scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,3.4,-1.6>  
                    }  // end of sphere -----------------------------------  
                    
                    
@@ -159,7 +161,7 @@ sphere { c, 0.3
                   finish { phong 1.0 reflection 0.00}
                 } // end of texture
 
-          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,0.5,-0.4>  
+          scale<1,1,1>*proportion  rotate<0,0,0>  translate<0.2,3.4,-0.4>  
        }  // end of sphere ----------------------------------- 
 
                    
@@ -170,7 +172,7 @@ sphere { c, 0.3
                           finish { phong 1.0 reflection 0.00}
                         } // end of texture
         
-                 scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,0.5,-0.3>  
+                 scale<1,1,1>*proportion  rotate<0,0,0>  translate<-0.05,3.4,-0.4>  
                }  // end of sphere ----------------------------------- 
        
        
@@ -183,7 +185,7 @@ object{ // Round_Box(A, B, WireRadius, UseMerge)
                //normal { radial sine_wave frequency 30 scale 0.25 }
                  finish { phong 1 }
                 }
-        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,0,0>
+        scale<1,1,1>*proportion  rotate<0, 0,0> translate<0,3,0>
       } // ---------------------------------------------------------
 
 //Nose            
@@ -192,14 +194,14 @@ triangle {
                 texture { pigment{ color Orange } 
                 finish { phong 1.0 }
               }
-              scale<1,1,1>*proportion
+              scale<1,1,1>*proportion rotate<0, 0,0> translate<0,3,0>
                }
                
                
 //Cola 
 
 object{ // Round_Box(A, B, WireRadius, UseMerge)
-        Round_Box( c+<w,h-0.6,-0.5>,c+<5.3,0.2,-1.4>, 0.1   , 0)  
+        Round_Box( c+<w,0.6,-0.3>,c+<3.5,0.2,-1.5>, 0.1   , 0)  
          
         texture{ pigment{ color Red}
                //normal { radial sine_wave frequency 30 scale 0.25 }

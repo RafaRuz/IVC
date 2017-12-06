@@ -1,8 +1,8 @@
 #include "colors.inc"
 #include "shapes.inc" 
     
-#declare w = 4; //width
-#declare h = 1; //height 
+#declare w = 1; //width
+#declare h = 4; //height 
 #declare d = -2; //depth
 #declare proportion = 1;  
 
@@ -11,8 +11,8 @@
 camera{
 
 
-    location <-4,4,4>
-    look_at <2,0,-1>
+    location <-4,6,4>
+    look_at <2,4,-1>
 
 }  
 
