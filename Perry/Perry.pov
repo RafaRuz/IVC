@@ -13,8 +13,8 @@ camera{
 
     location <-15,15,-1>
     look_at <2,0,-1>
-    rotate<10*clock,90*clock,0> 
-    translate<0,-.5*clock,0>
+    rotate<10*clock,-90*clock,0> 
+    translate<0,-.4*clock,0>
 
 }  
 
