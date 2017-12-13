@@ -8,7 +8,7 @@
 
 
 camera{
-    location <7,20,-7>
+    location <5,18,-5>
     look_at <0,18,0>
 }
 
@@ -198,11 +198,64 @@ cone { <0,0,0>,0.4,<0,1,0>,0.2
        scale <1,1,1> rotate<0,0,-60> translate<-1.3,17.5,0>         
      } // end of cone -------------------------------------
      
-     
+      
 // Left Arm
+#declare Strength = 1; //(+ or -) strength of component's radiating density
+#declare Radius1  = 0.15; //(0 < Radius) outer sphere of influence on other components
+blob{
+  threshold 0.01 // threshold (0.0 < threshold <= Strength) surface falloff threshold #
+  cylinder { <0,0,0>,<0,1,0>, Radius1, Strength 
+
+           texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4  } // very light red  
+                        // normal { bumps 0.5 scale 0.05 }
+                           finish { phong 1 reflection 0.00}
+                      scale 0.25 
+                    } // end of texture
+
+           scale <1,1,1> rotate<30,0,60> translate<3,16.5,-0.5>
+         } // end of cylinder -------------------------------------               
+         
+cylinder { <0,0.9,0>,<0,3,0>, Radius1, Strength 
+
+           texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4  } // very light red  
+                        // normal { bumps 0.5 scale 0.05 }
+                           finish { phong 1 reflection 0.00}
+                      scale 0.25 
+                    } // end of texture
+
+           scale <1,1,1> rotate<0,0,60> translate<3,16.5,0>
+         }
+ } //------------------------------------------------------ end of blob object             
+
 
 // Right Arm
+blob{
+  threshold 0.01 // threshold (0.0 < threshold <= Strength) surface falloff threshold #
+  cylinder { <0,0,0>,<0,1,0>, Radius1, Strength 
 
+           texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4  } // very light red  
+                        // normal { bumps 0.5 scale 0.05 }
+                           finish { phong 1 reflection 0.00}
+                      scale 0.25 
+                    } // end of texture
+
+           scale <1,1,1> rotate<30,0,-60> translate<-3,16.5,-0.5>
+         } // end of cylinder -------------------------------------               
+         
+cylinder { <0,0.9,0>,<0,3,0>, Radius1, Strength 
+
+           texture{ pigment{ color rgb< 1, 0.5, 0.5>*1.4  } // very light red  
+                        // normal { bumps 0.5 scale 0.05 }
+                           finish { phong 1 reflection 0.00}
+                      scale 0.25 
+                    } // end of texture
+
+           scale <1,1,1> rotate<0,0,-60> translate<-3,16.5,0>
+         }
+ } //------------------------------------------------------ end of blob object
+         
+         
+         
 // Left Hand
 
 // Right Hand
