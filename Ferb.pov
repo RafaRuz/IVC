@@ -10,12 +10,12 @@
 //Debugging variables                            
 #declare camera_left_side = <-15,-1,0>;
 #declare camera_right_side = <10,-1,0>;
-#declare camera_center_side = <0,0,-18>;
+#declare camera_center_side = <0,10,-20>;
 #declare camera_up_side = <0,20,0>;
 
 //Physiognomy
 #declare head_size = 7;
-#declare body_size = 5;
+#declare body_size = 5.5;
 
 //Face factions positions variables
 #declare face_up_position = c+<0,head_size,0>;
@@ -32,12 +32,19 @@
 //Body position variables
 #declare body_up_position = face_down_position;
 #declare body_down_position = body_up_position+<0,-body_size,0>;
-#declare arm_size = 4;
+#declare arm_size = 4;                                                 
+#declare arm_radius = 0.2;
 #declare arm_left_up_position = body_up_position+<-0.5, -0.3, 0>;
 #declare arm_left_down_position = arm_left_up_position+<-arm_size,0,0>;
-#declare arm_radius = 0.15;
 #declare arm_right_up_position = body_up_position+<0.5,-0.3,0>;
+#declare leg_size = 3;
+#declare leg_radius = 0.2;
 #declare arm_right_down_position = arm_right_up_position+<arm_size,0,0>;
+#declare leg_left_up_position = body_down_position+<-0.5,0,0>;
+#declare leg_left_down_position = leg_left_up_position+<0,-leg_size,0>;
+#declare leg_right_up_position = body_down_position+<0.5,0,0>;
+#declare leg_right_down_position = leg_right_up_position+<0,-leg_size,0>;
+
 
 //Color variables
 #declare skin_color = color rgb< 1, 0.5, 0.5>*1.4;
@@ -64,8 +71,7 @@ union{
             pigment{color rgb< 1, 0.5, 0.5>*1.4}
         }
     }
-    
-    
+  
     union{
     
         //Right eye
@@ -107,14 +113,24 @@ union{
             pigment{skin_color}
         }
            
-    }
-    
+    }    
     //body
-    cone{
-        body_up_position, radius_down_face+0.1
-        body_down_position, radius_down_face+0.1
-        texture{
-            pigment{skin_color}
+    union{            
+        cylinder{
+            body_up_position,
+            body_down_position,
+            radius_down_face+0.1
+            texture{
+                pigment{White}
+            }
+        }
+        cylinder{
+            body_up_position+<0,-0.8,0>
+            body_down_position
+            radius_down_face+0.15
+            texture{
+                pigment{DarkPurple}
+            }
         }
     }
     
@@ -128,28 +144,89 @@ union{
             pigment{color Green}
         }
     }
-    
-    //Left arm
-    cylinder{
-        arm_left_up_position,
-        arm_left_down_position,
-        arm_radius
-        texture{
-            pigment{skin_color}
+    union{
+        //Left arm
+        cylinder{
+            arm_left_up_position,
+            arm_left_down_position,
+            arm_radius
+            texture{
+                pigment{skin_color}
+            }
+        }
+        
+        cylinder{
+            arm_left_up_position
+            arm_left_down_position+<3,0,0>
+            arm_radius+0.1
+            texture{
+                pigment{White}
+            }
+        
         }
     }
-    
-    //Right arm
-    cylinder{
-        arm_right_up_position,
-        arm_right_down_position,
-        arm_radius
-        texture{
-            pigment{skin_color}
+    union{
+        //Right arm
+        cylinder{
+            arm_right_up_position,
+            arm_right_down_position,
+            arm_radius
+            texture{
+                pigment{skin_color}
+            }
+        }
+        cylinder{
+            arm_right_up_position,
+            arm_right_down_position+<-3,0,0>
+            arm_radius+0.1
+            texture{
+                pigment{White}
+            }
         }
     }
-    
-    //Left leg
-    
-    //Right leg
+    union{
+        //Left leg
+        cylinder{
+            leg_left_up_position,
+            leg_left_down_position,
+            leg_radius
+            texture{
+                pigment{skin_color}
+            }
+        }
+        cylinder{
+            leg_left_up_position,
+            leg_left_down_position+<0,1,0>
+            leg_radius+0.1
+            texture{
+                pigment{DarkPurple}
+            }
+        
+        }
+        
+    }
+    union{
+        //Right leg
+        cylinder{
+            leg_right_up_position,
+            leg_right_down_position,
+            leg_radius
+            texture{
+                pigment{skin_color}
+            }
+        }
+        cylinder{
+            leg_right_up_position,
+            leg_right_down_position+<0,1,0>
+            leg_radius+0.1
+            texture{
+                pigment{DarkPurple}
+            }
+        }
+        
+    }
+    //right hand
+               
+               
+    //left hand
 }
