@@ -225,8 +225,7 @@ union{
         }
         
     }
-    //right hand
-               
-               
-    //left hand
+    //left shoe
+    
+
 }
