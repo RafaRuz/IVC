@@ -10,12 +10,12 @@
 //Debugging variables                            
 #declare camera_left_side = <-15,-1,0>;
 #declare camera_right_side = <10,-1,0>;
-#declare camera_center_side = <0,0,-18>;
+#declare camera_center_side = <0,8,-30>;
 #declare camera_up_side = <0,20,0>;
 
 //Physiognomy
-#declare head_size = 7;
-#declare body_size = 5;
+#declare head_size = 6;
+#declare body_size = 5.5;
 
 //Face factions positions variables
 #declare face_up_position = c+<0,head_size,0>;
@@ -26,18 +26,28 @@
 #declare left_eye_position = c+<-0.4,4,-0.9>;
 #declare eye_radius = 0.75;
 #declare nose_position_corner1 = left_eye_position+<-0.3,-2,-1>;
-#declare nose_position_corner2 = right_eye_position+<0.1,-0.6,0>;
+#declare nose_position_corner2 = right_eye_position+<0.1,-0.75,0>;
 #declare base_hair_position = face_up_position+<0,0.1,0>;
 
 //Body position variables
 #declare body_up_position = face_down_position;
 #declare body_down_position = body_up_position+<0,-body_size,0>;
-#declare arm_size = 4;
+#declare arm_size = 4;                                                 
+#declare arm_radius = 0.3;
 #declare arm_left_up_position = body_up_position+<-0.5, -0.3, 0>;
 #declare arm_left_down_position = arm_left_up_position+<-arm_size,0,0>;
-#declare arm_radius = 0.15;
 #declare arm_right_up_position = body_up_position+<0.5,-0.3,0>;
+#declare leg_size = 3;
+#declare leg_radius = 0.2;
+#declare arm_inclination = 1.2;
+#declare arm_right_elbow_position = arm_right_up_position+<1.5,-arm_inclination,0>;
 #declare arm_right_down_position = arm_right_up_position+<arm_size,0,0>;
+#declare leg_left_up_position = body_down_position+<-0.5,0,0>;
+#declare arm_left_elbow_position = arm_left_up_position+<-1.5,-arm_inclination,0>;
+#declare leg_left_down_position = leg_left_up_position+<0,-leg_size,0>;
+#declare leg_right_up_position = body_down_position+<0.5,0,0>;
+#declare leg_right_down_position = leg_right_up_position+<0,-leg_size,0>;
+
 
 //Color variables
 #declare skin_color = color rgb< 1, 0.5, 0.5>*1.4;
@@ -64,8 +74,7 @@ union{
             pigment{color rgb< 1, 0.5, 0.5>*1.4}
         }
     }
-    
-    
+  
     union{
     
         //Right eye
@@ -100,33 +109,35 @@ union{
     }
     
     //Nose
-    box{
-        nose_position_corner1
-        nose_position_corner2
-        texture{
-            pigment{skin_color}
-        }
-           
-    }
-    
-    //body
-    union{
-        cone{
-            body_up_position, radius_down_face+0.1
-            body_down_position+<0,5,0>, radius_down_face+0.1
+    object{ // Round_Box(A, B, WireRadius, UseMerge)
+        Round_Box(nose_position_corner1,nose_position_corner2, 0.25   , 0)  
+         
+        texture{ pigment{ skin_color}
+               //normal { radial sine_wave frequency 30 scale 0.25 }
+                 finish { phong 1 }
+                }
+        scale<1,1,1>  rotate<0, 0,0> translate<0,0.1,0>
+    } // ---------------------------------------------------------
+    union{            
+        cylinder{
+            body_up_position,
+            body_down_position,
+            radius_down_face+0.1
             texture{
-                pigment{color Yellow}
+                pigment{White}
             }
         }
-        cone{
-            body_down_position+<0,2,0>, radius_down_face+0.2
-            body_down_position, radius_down_face+0.2
-            texture{
-                pigment{color Blue}
-            }
-        }
+        object { //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+         Round_Cylinder(body_up_position+<0,-0.8,0>, body_down_position, radius_down_face+0.20 ,       0.20,   0)  
+         texture{ pigment{DarkPurple}
+                //normal { radial sine_wave frequency 30 scale 0.25 }
+                  finish { phong 1 }
+                }
+         scale<1,1,1>  rotate<0, 0,0> translate<0,0.00,0>
+       } // ---------------------------------------------------------
         
     }
+   
     //Hair
     union{
     
@@ -136,29 +147,131 @@ union{
             radius_up_face
             pigment{color Green}
         }
+        cone{
+            base_hair_position,
+            0.5,
+            base_hair_position+<0,1.4,-8>
+            0
+            texture{
+                pigment{Green}
+            }
+            
+        }
+        cone{
+            base_hair_position+<0.2,0,0>
+            0.8,
+            base_hair_position+<1.2,1.4,-5>
+            0
+            texture{
+                pigment{Green}
+            }
+        }
+        cone{
+            base_hair_position+<-0.3,0,0>
+            0.8
+            base_hair_position+<-1,1.4,-3>,
+            0
+            texture{
+                pigment{Green}
+            }
+        }
+        cone{
+            base_hair_position+<0.3,0,-0.3>
+            0.8
+            base_hair_position+<0.3,2,-1.2>
+            0
+            texture{
+                pigment{Green}
+            }
+        }
+        
     }
-    
-    //Left arm
-    cylinder{
-        arm_left_up_position,
-        arm_left_down_position,
-        arm_radius
-        texture{
-            pigment{skin_color}
+    union{
+        //Left arm
+        blob {
+            threshold 0.1
+            cylinder{arm_left_up_position, arm_left_elbow_position+<0,-0.6,0>, arm_radius, 2}    //lower pinky
+            cylinder{arm_left_elbow_position+<0,-0.6,0>, arm_left_elbow_position+<0.0,-1.3,-1>, arm_radius, 2}  //upper pinky
+            texture{
+                pigment{ skin_color }
+            }
+        }
+        cylinder{
+            arm_left_up_position,
+            arm_left_down_position+<3,-arm_inclination,0>
+            arm_radius+0.1
+            texture{
+                pigment{White}
+            }
         }
     }
-    
-    //Right arm
-    cylinder{
-        arm_right_up_position,
-        arm_right_down_position,
-        arm_radius
-        texture{
-            pigment{skin_color}
+    union{
+        //Right arm
+        blob {
+            threshold 0.1
+            cylinder{arm_right_up_position, arm_right_elbow_position+<0,-0.6,0>, arm_radius, 2}    //lower pinky
+            cylinder{arm_right_elbow_position+<0,-0.6,0>, arm_right_elbow_position+<0.0,-1.3,-1>, arm_radius, 2}  //upper pinky
+            texture{
+                pigment{ skin_color }
+            }
+        }
+        cylinder{
+            arm_right_up_position,
+            arm_right_down_position+<-3,-arm_inclination,0>
+            arm_radius+0.1
+            texture{
+                pigment{White}
+            }
         }
     }
+    union{
+        //Left leg
+        object { //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+         Round_Cylinder(leg_left_up_position, leg_left_down_position, leg_radius, 0.20, 0)  
+         
+         texture{ pigment{skin_color}
+                //normal { radial sine_wave frequency 30 scale 0.25 }
+                  finish { phong 1 }
+                }
+         scale<1,1,1>  rotate<0, 0,0> translate<0,0.00,0>
+       } // ---------------------------------------------------------
+       
+       object { //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+         Round_Cylinder(leg_left_up_position, leg_left_down_position+<0,1,0>, leg_radius+0.1, 0.20, 0)  
+         
+         texture{ pigment{DarkPurple}
+                //normal { radial sine_wave frequency 30 scale 0.25 }
+                  finish { phong 1 }
+                }
+         scale<1,1,1>  rotate<0, 0,0> translate<0,0.00,0>
+       } // ---------------------------------------------------------
+        
+    }
+    union{
+        //Right leg
+        object { //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+         Round_Cylinder(leg_right_up_position, leg_right_down_position, leg_radius ,       0.20,   0)  
+         
+         texture{ pigment{skin_color}
+                //normal { radial sine_wave frequency 30 scale 0.25 }
+                  finish { phong 1 }
+                }
+         scale<1,1,1>  rotate<0, 0,0> translate<0,0.00,0>
+       } // ---------------------------------------------------------
+       
+       //Right leg
+        object { //Round_Cylinder(point A, point B, Radius, EdgeRadius, UseMerge)
+         Round_Cylinder(leg_right_up_position, leg_right_down_position+<0,1,0>, leg_radius+0.1, 0.20,   0)  
+         
+         texture{ pigment{DarkPurple}
+                //normal { radial sine_wave frequency 30 scale 0.25 }
+                  finish { phong 1 }
+                }
+         scale<1,1,1>  rotate<0, 0,0> translate<0,0.00,0>
+       }
+        
+    }
+    //left shoe
     
-    //Left leg
-    
-    //Right leg
+
 }
